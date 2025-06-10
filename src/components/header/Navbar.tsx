@@ -4,6 +4,7 @@ import { PenLine, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { UserButton } from "@clerk/nextjs";
 
 export default function Navbar() {
   const router = useRouter();
@@ -30,13 +31,16 @@ export default function Navbar() {
         </div>
 
         {/* Write Button */}
-        <Button
-          onClick={handleNavigation}
-          className="bg-indigo-600 hover:bg-sky-400 hover:text-black cursor-pointer text-white rounded-sm flex items-center gap-2 px-4 py-2 shadow-md"
-        >
-          <PenLine className="w-4 h-4" />
-          <span className="text-sm font-medium">Write Post </span>
-        </Button>
+        <div className="flex gap-3">
+          <Button
+            onClick={handleNavigation}
+            className="bg-indigo-600 hover:bg-sky-400 hover:text-black cursor-pointer text-white rounded-sm flex items-center gap-2 px-4 py-2 shadow-md"
+          >
+            <PenLine className="w-4 h-4" />
+            <span className="text-sm font-medium">Write Post </span>
+          </Button>
+          <UserButton />
+        </div>
       </div>
     </header>
   );
