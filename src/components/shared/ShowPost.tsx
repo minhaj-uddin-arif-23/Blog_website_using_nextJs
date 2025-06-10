@@ -9,7 +9,7 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { Button } from "../ui/button";
-import { Pencil, Trash2 } from "lucide-react";
+import { Heart, MessageCircle, Pencil, Trash2 } from "lucide-react";
 import Link from "next/link";
 
 import Swal from "sweetalert2";
@@ -31,6 +31,8 @@ type PostProps = {
 
 export default function ShowPost({ data, handleRemovePost }: PostProps) {
   const { _id, title, content, summary, readTime, tags, category } = data;
+
+    
 
   const handleDelete = async () => {
     const result = await Swal.fire({
@@ -90,20 +92,37 @@ export default function ShowPost({ data, handleRemovePost }: PostProps) {
         </div>
         <div className="flex flex-wrap gap-2">{tags}</div>
 
-        <section className="flex gap-4">
-          <Link href={`/update-post/${_id}`}>
-            <Button className="bg-blue-600 flex items-center gap-2 cursor-pointer">
-              <Pencil className="w-4 h-4" />
-              Edit
+        <section className="flex justify-between">
+          <section className="flex gap-4">
+            <Link href={`/update-post/${_id}`}>
+              <Button className="bg-blue-600 flex items-center gap-2 cursor-pointer">
+                <Pencil className="w-4 h-4" />
+                Edit
+              </Button>
+            </Link>
+            <Button
+              onClick={handleDelete}
+              className="bg-red-500 flex items-center gap-2 cursor-pointers"
+            >
+              <Trash2 className="w-4 h-4" />
+              Delete
             </Button>
-          </Link>
-          <Button
-            onClick={handleDelete}
-            className="bg-red-500 flex items-center gap-2 cursor-pointers"
-          >
-            <Trash2 className="w-4 h-4" />
-            Delete
-          </Button>
+          </section>
+          <section className="">
+            <div className="flex items-center gap-4 mt-2">
+              {/* Like Button */}
+              <button className="flex items-center gap-1 hover:text-red-600">
+                <Heart size={20} />
+                <span></span>
+              </button>
+
+              {/* Comment Button */}
+              <button className="flex items-center gap-1 hover:text-blue-600">
+                <MessageCircle size={20} />
+                <span></span>
+              </button>
+            </div>
+          </section>
         </section>
       </CardContent>
     </Card>
