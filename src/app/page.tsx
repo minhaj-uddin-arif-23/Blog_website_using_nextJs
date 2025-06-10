@@ -1,9 +1,15 @@
 import Navbar from "@/components/header/Navbar";
+import Postdata from "@/components/shared/Postdata";
 
 export default function Home() {
   return (
     <div>
-      <Navbar />
+      <div>
+        <Navbar />
+      </div>
+      <div>
+        <Postdata />
+      </div>
     </div>
   );
 }
