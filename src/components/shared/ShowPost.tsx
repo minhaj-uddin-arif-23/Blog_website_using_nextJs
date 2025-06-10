@@ -95,18 +95,18 @@ export default function ShowPost({ data, handleRemovePost }: PostProps) {
         <section className="flex justify-between">
           <section className="flex gap-4">
             <Link href={`/update-post/${_id}`}>
-              <Button className="bg-blue-600 flex items-center gap-2 cursor-pointer">
+              <Button className="border-1 px-3 hover:bg-sky-600 hover:text-white rounded-2xl flex items-center gap-2 cursor-pointer bg-blue-600 text-white">
                 <Pencil className="w-4 h-4" />
                 Edit
               </Button>
             </Link>
-            <Button
+            <button
               onClick={handleDelete}
-              className="bg-red-500 flex items-center gap-2 cursor-pointers"
+              className="border-1 px-3 rounded-2xl flex items-center gap-2 cursor-pointer hover:bg-red-600 hover:text-white"
             >
               <Trash2 className="w-4 h-4" />
               Delete
-            </Button>
+            </button>
           </section>
           <section className="">
             <div className="flex items-center gap-4 mt-2">

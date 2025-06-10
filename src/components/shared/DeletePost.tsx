@@ -23,7 +23,7 @@ export default function DeletePost({ id }: { id: string }) {
   };
 
   return (
-    <Button onClick={handleDelete} className="bg-red-600 text-white flex items-center gap-2">
+    <Button onClick={handleDelete} className="  flex items-center gap-2">
       <Trash2 className="w-4 h-4" />
       Delete
     </Button>
