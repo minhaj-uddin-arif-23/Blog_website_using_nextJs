@@ -12,8 +12,11 @@ type Post = {
   tags: string[];
   category: string;
 };
-export default function Postdata() {
-  const [posts, setPosts] = useState<Post[]>([]);
+type Props = {
+  initialPage: Post[];
+};
+export default function Postdata({ initialPage }: Props) {
+  const [posts, setPosts] = useState<Post[]>(initialPage || []);
 
   useEffect(() => {
     fetch("/api/posts")
@@ -21,6 +24,12 @@ export default function Postdata() {
       .then((data) => setPosts(data))
       .catch(console.error);
   }, []);
+
+  const handleRemovePost = (id: string) => {
+    setPosts(posts.filter((post) => post._id != id));
+  };
+
+
 
   return (
     <div>
@@ -32,7 +41,14 @@ export default function Postdata() {
           <p>No posts found</p>
         ) : (
           posts.map((post) => (
-            <ShowPost key={post._id.toString()} data={post} />
+            <div key={post._id.toString()}>
+              <ShowPost  data={post}
+                handleRemovePost={()=>handleRemovePost(post._id)}
+              />
+             
+               
+
+            </div>
           ))
         )}
       </div>
