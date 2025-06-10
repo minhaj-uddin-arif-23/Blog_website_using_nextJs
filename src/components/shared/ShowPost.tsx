@@ -14,6 +14,7 @@ import Link from "next/link";
 
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import { CommentPopup } from "../CommentPopup";
 type Post = {
   _id: string;
   title: string;
@@ -31,8 +32,6 @@ type PostProps = {
 
 export default function ShowPost({ data, handleRemovePost }: PostProps) {
   const { _id, title, content, summary, readTime, tags, category } = data;
-
-    
 
   const handleDelete = async () => {
     const result = await Swal.fire({
@@ -67,7 +66,8 @@ export default function ShowPost({ data, handleRemovePost }: PostProps) {
   };
 
   return (
-    <Card className="my-6 shadow-md hover:shadow-xl transition duration-300 border border-muted bg-background">
+ 
+     <Card className="my-6 shadow-md hover:shadow-xl transition duration-300 border border-muted bg-background">
       <CardHeader className="space-y-2">
         <CardTitle className="text-2xl font-semibold text-primary">
           {title}
@@ -115,16 +115,15 @@ export default function ShowPost({ data, handleRemovePost }: PostProps) {
                 <Heart size={20} />
                 <span></span>
               </button>
-
               {/* Comment Button */}
-              <button className="flex items-center gap-1 hover:text-blue-600">
-                <MessageCircle size={20} />
-                <span></span>
-              </button>
+              {/* <button className="flex items-center gap-1 hover:text-blue-600"> */}
+              {/* <MessageCircle size={20} /> */} <CommentPopup postId={""} name={""} email={""} />{" "}
+              {/* </button> */}
             </div>
           </section>
         </section>
       </CardContent>
     </Card>
+
   );
 }
