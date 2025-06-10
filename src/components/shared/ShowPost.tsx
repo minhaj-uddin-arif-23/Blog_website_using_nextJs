@@ -7,9 +7,13 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
+import { Button } from "../ui/button";
+import { Pencil, Trash2 } from "lucide-react";
+import Link from "next/link";
 
 interface PostProps {
   data: {
+    _id: string;
     title: string;
     content: string;
     summary: string;
@@ -28,6 +32,7 @@ export default function Postdata({ data }: PostProps) {
         <CardTitle className="text-2xl font-semibold text-primary">
           {title}
         </CardTitle>
+
         <CardDescription className="text-muted-foreground">
           {summary}
         </CardDescription>
@@ -47,6 +52,18 @@ export default function Postdata({ data }: PostProps) {
           </p>
         </div>
         <div className="flex flex-wrap gap-2">{tags}</div>
+        <section className="flex gap-4">
+          <Link href={`/update-post/${data._id}`}>
+            <Button className="bg-blue-600 flex items-center gap-2 cursor-pointer">
+              <Pencil className="w-4 h-4" />
+              Update
+            </Button>
+          </Link>
+          <Button className="bg-red-500 flex items-center gap-2">
+            <Trash2 className="w-4 h-4" />
+            Cancel
+          </Button>
+        </section>
       </CardContent>
     </Card>
   );
