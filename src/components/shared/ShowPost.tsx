@@ -66,8 +66,9 @@ export default function ShowPost({ data, handleRemovePost }: PostProps) {
   };
 
   return (
- 
-     <Card className="my-6 shadow-md hover:shadow-xl transition duration-300 border border-muted bg-background">
+    <Card className="my-6 w-[380px] h-[345px] flex flex-col justify-between 
+             shadow-md hover:shadow-xl transition duration-300 
+             border border-muted bg-background overflow-hidden ">
       <CardHeader className="space-y-2">
         <CardTitle className="text-2xl font-semibold text-primary">
           {title}
@@ -79,12 +80,14 @@ export default function ShowPost({ data, handleRemovePost }: PostProps) {
 
       <CardContent className="space-y-4 text-sm leading-relaxed">
         <p className="text-gray-700 dark:text-gray-300">
-          <span className="font-medium text-foreground">Content:</span>{" "}
-          {content}
+          {/* <span className="font-medium text-foreground"></span>{" "} */}
+          {content.split(" ").slice(0, 20).join(" ")} ...
+          <Link href={`/data/${_id}`} className="text-blue-500 hover:underline ml-2">See more</Link>
         </p>
         <div className="flex items-center gap-4 flex-wrap">
           <p className="text-muted-foreground">
-            ⏱ <span className="font-medium">Read Time:</span> {readTime}
+            {"⏱ "}
+            <span className="font-medium">Read Time:</span> {readTime}
           </p>
           <p className="text-muted-foreground">
             <span className="font-medium">Category:</span> {category}
@@ -117,13 +120,13 @@ export default function ShowPost({ data, handleRemovePost }: PostProps) {
               </button>
               {/* Comment Button */}
               {/* <button className="flex items-center gap-1 hover:text-blue-600"> */}
-              {/* <MessageCircle size={20} /> */} <CommentPopup postId={""} name={""} email={""} />{" "}
+              {/* <MessageCircle size={20} /> */}{" "}
+              <CommentPopup postId={""} name={""} email={""} />{" "}
               {/* </button> */}
             </div>
           </section>
         </section>
       </CardContent>
     </Card>
-
   );
 }

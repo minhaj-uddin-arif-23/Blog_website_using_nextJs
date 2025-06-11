@@ -49,7 +49,7 @@ export function CommentPopup({ postId, name, email, image }: Props) {
           className="flex items-center gap-1 hover:text-blue-600 cursor-pointer"
         >
           <MessageCircle size={20} />
-          <span>Comment</span>
+          {/* <span>Comment</span> */}
         </button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">

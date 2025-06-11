@@ -97,7 +97,7 @@ export default function Postdata() {
         {filteredPosts?.length} Posts Found
       </p>
 
-      <div className="container mx-auto px-4 py-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="container mx-auto px-4 py-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-20">
         {filteredPosts.length === 0 ? (
           <p>No posts found</p>
         ) : (
@@ -114,7 +114,7 @@ export default function Postdata() {
 
       {/* Pagination Controls */}
    {/* Button-wise Pagination */}
-<div className="flex justify-center items-center mt-6 gap-2 flex-wrap">
+<div className="flex justify-center items-center mt-7 mb-12 gap-2 flex-wrap">
   <Button
     variant="outline"
     onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
