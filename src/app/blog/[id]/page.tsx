@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// app/blog/[id]/page.tsx
 import Comment from "@/components/model/Comment";
 import connectToDB from "@/lib/mongodb";
 import Image from "next/image";
 
-export default async function BlogPage({ params }: { params: { id: string } }) {
+export default async function BlogPage({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = await params; // Resolve the Promise
   await connectToDB;
-  const comments = await Comment.find({ postId: params.id }).sort({ createdAt: -1 });
+  const comments = await Comment.find({ postId: resolvedParams.id }).sort({ createdAt: -1 });
 
   return (
     <div>
-      <h1>Blog Post ID: {params.id}</h1>
+      <h1>Blog Post ID: {resolvedParams.id}</h1>
 
       <h2 className="mt-6 text-xl font-semibold">Comments</h2>
       <ul className="mt-4 space-y-4">

@@ -1,11 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
 // app/search/page.tsx
-'use client';
+"use client";
 
-import ShowPost from '@/components/shared/ShowPost';
-import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
-
+import ShowPost from "@/components/shared/ShowPost";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState, Suspense } from "react";
 
 type Post = {
   _id: string;
@@ -18,8 +17,16 @@ type Post = {
 };
 
 export default function SearchPage() {
+  return (
+    <Suspense fallback={<div>Loading search results...</div>}>
+      <SearchContent />
+    </Suspense>
+  );
+}
+
+function SearchContent() {
   const searchParams = useSearchParams();
-  const query = searchParams.get('q') || '';
+  const query = searchParams.get("q") || "";
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
 

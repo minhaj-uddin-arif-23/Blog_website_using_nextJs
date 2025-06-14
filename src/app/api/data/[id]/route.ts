@@ -1,35 +1,36 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { NextResponse, NextRequest } from "next/server";
 import clientPromise from "@/lib/mongodb";
 import { ObjectId } from "mongodb";
 
 export async function GET(
-  request: Request,
-  context: { params: { id: string } }
-): Promise<Response> {
-  const { id } = context.params;
+  request: NextRequest,
+  context: { params: Promise<{ id: string }> }
+) {
+  const params = await context.params; // Resolve the Promise
+  const { id } = params;
 
   try {
-    const client = await clientPromise;
+    if (!ObjectId.isValid(id)) {
+      return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
+    }
 
+    const client = await clientPromise;
     const db = client.db("blogDb");
+
     const data = await db
       .collection("posts")
       .findOne({ _id: new ObjectId(id) });
+
     if (!data) {
-      return new Response(JSON.stringify({ error: "Not found" }), {
-        status: 404,
-        headers: { "Content-Type": "application/json" },
-      });
+      return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
 
-    return new Response(JSON.stringify(data), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
+    return NextResponse.json(data, { status: 200 });
   } catch (error) {
-    return new Response(JSON.stringify({ error: "failed to fetch the data" }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    return NextResponse.json(
+      { error: "Failed to fetch the data" },
+      { status: 500 }
+    );
   }
 }

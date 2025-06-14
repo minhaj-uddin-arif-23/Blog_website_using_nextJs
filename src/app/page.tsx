@@ -8,7 +8,7 @@ export default function Home() {
         {/* <Navbar /> */}
       </div>
       <div>
-        <Postdata initialPage={[]} />
+        <Postdata />
       </div>
     </div>
   );

@@ -4,14 +4,17 @@ import { ObjectId } from "mongodb";
 
 export async function DELETE(
   req: Request,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ): Promise<Response> {
+  const params = await context.params; // Resolve the Promise
+  const { id } = params;
+
   try {
     const client = await clientPromise;
     const db = client.db("blogDb");
 
     const result = await db.collection("posts").deleteOne({
-      _id: new ObjectId(context.params.id),
+      _id: new ObjectId(id),
     });
 
     if (result.deletedCount === 1) {

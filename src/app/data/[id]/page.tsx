@@ -15,19 +15,19 @@ type Post = {
 };
 
 type PageProps = {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }>;
 };
 
 export default async function Page({ params }: PageProps) {
+  const resolvedParams = await params; // Resolve the Promise
+
   const client = await clientPromise;
   const db = client.db("blogDb");
 
   try {
     const result = await db
       .collection("posts")
-      .findOne({ _id: new ObjectId(params.id) });
+      .findOne({ _id: new ObjectId(resolvedParams.id) });
 
     if (!result) return notFound(); // better UX for missing pages
 

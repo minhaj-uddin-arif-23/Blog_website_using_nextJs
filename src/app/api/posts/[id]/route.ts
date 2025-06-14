@@ -4,8 +4,11 @@ import { ObjectId } from "mongodb";
 
 export async function PUT(
   req: Request,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ): Promise<Response> {
+  const params = await context.params; // Resolve the Promise
+  const { id } = params;
+
   try {
     const body = await req.json();
     const client = await clientPromise;
@@ -13,12 +16,11 @@ export async function PUT(
 
     const result = await db
       .collection("posts")
-      .updateOne({ _id: new ObjectId(context.params.id) }, { $set: body });
+      .updateOne({ _id: new ObjectId(id) }, { $set: body });
 
-    if(result.matchedCount === 0){
-      return NextResponse.json({message:'Post not found'},{status:400})
+    if (result.matchedCount === 0) {
+      return NextResponse.json({ message: "Post not found" }, { status: 400 });
     }
-
 
     return NextResponse.json({ message: "Post updated", result });
   } catch (error) {

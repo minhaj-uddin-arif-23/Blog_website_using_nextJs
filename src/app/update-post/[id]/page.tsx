@@ -5,13 +5,15 @@ import { ObjectId } from "mongodb";
 export default async function UpdatePostPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
+  const resolvedParams = await params; // Resolve the Promise
+
   const client = await clientPromise;
   const db = client.db("blogDb");
   const post = await db
     .collection("posts")
-    .findOne({ _id: new ObjectId(params.id) });
+    .findOne({ _id: new ObjectId(resolvedParams.id) });
 
   if (!post) return <div>Post not found</div>;
 
