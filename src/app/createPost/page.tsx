@@ -44,14 +44,10 @@ export default function CreatePostPage() {
       category,
     };
     try {
-      const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/create`,
-        {
-          data,
-        }
-      );
+      const res = axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/create`, {
+        data,
+      });
 
-      console.log("✅ Post saved:", res.data);
       toast.success("Post created successfully");
       router.push("/");
     } catch (err) {
@@ -87,7 +83,6 @@ export default function CreatePostPage() {
                 placeholder="Start writing here..."
               />
             </CardContent>
-            
 
             <CardFooter className="flex justify-end gap-2">
               <Button variant="outline">Cancel</Button>

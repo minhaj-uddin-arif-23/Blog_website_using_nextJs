@@ -83,7 +83,7 @@ export default function Postdata() {
           <ModeToggle />
           <Button
             onClick={handleNavigation}
-            className="bg-blue-600 hover:bg-sky-600 text-white flex items-center gap-2"
+            className="bg-blue-600 hover:bg-sky-600 text-white flex items-center gap-2 cursor-pointer"
           >
             <PenLine className="w-4 h-4" />
             <span>Write Post</span>
