@@ -123,7 +123,7 @@ export default function CreatePostPage() {
           </div>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-4 lg:mt-13">
           {/* Summary */}
           <Card>
             <CardHeader>
