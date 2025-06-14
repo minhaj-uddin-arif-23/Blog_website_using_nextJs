@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
@@ -20,8 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Badge } from "@/components/ui/badge";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
 export default function CreatePostPage() {
@@ -43,16 +42,14 @@ export default function CreatePostPage() {
       summary,
       category,
     };
-    try {
-      const res = axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/create`, {
-        data,
-      });
 
+    try {
+      await axios.post("/api/create", data); // Fixed: sending flat data
       toast.success("Post created successfully");
       router.push("/");
-    } catch (err) {
-      console.error("❌ Failed to save post:", err);
-      alert("Error saving post.");
+    } catch (err: any) {
+      console.error("❌ Failed to save post:", err?.response || err);
+      toast.error("Error saving post.");
     }
   };
 
@@ -119,7 +116,6 @@ export default function CreatePostPage() {
         </div>
 
         <div className="space-y-4 lg:mt-13">
-          {/* Summary */}
           <Card>
             <CardHeader>
               <Label>Blog Summary</Label>
@@ -133,7 +129,6 @@ export default function CreatePostPage() {
             </CardContent>
           </Card>
 
-          {/* Category */}
           <Card>
             <CardHeader>
               <Label>Category</Label>
