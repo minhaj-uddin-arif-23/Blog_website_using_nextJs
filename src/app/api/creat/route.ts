@@ -14,7 +14,7 @@ export const config = {
   },
 };
 
-export async function POST(req: any) {
+export async function POST(req: any): Promise<Response> {
   return new Promise((resolve, reject) => {
     const form = formidable({
       uploadDir: path.join(process.cwd(), "/public/uploads"),

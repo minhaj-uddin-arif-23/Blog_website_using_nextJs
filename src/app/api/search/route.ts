@@ -2,7 +2,7 @@
 import { NextResponse } from "next/server";
 import clientPromise from "@/lib/mongodb";
 
-export async function GET(request: Request) {
+export async function GET(request: Request):Promise<Response>  {
   const { searchParams } = new URL(request.url);
   const query = searchParams.get("q") || "";
 

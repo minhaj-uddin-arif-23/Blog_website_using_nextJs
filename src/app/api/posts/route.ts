@@ -3,7 +3,7 @@
 import clientPromise from "@/lib/mongodb";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
+export async function GET(req: NextRequest):Promise<Response>  {
   try {
     const client = await clientPromise;
     const db = client.db("blogDb");

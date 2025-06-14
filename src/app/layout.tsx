@@ -22,9 +22,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body className={roboto.className}>
+    <html lang="en">
+      <body className={roboto.className}>
+        <ClerkProvider>
           <ThemeProvider
             attribute={"class"}
             defaultTheme="system"
@@ -32,10 +32,10 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             {children}
+            <Toaster />
           </ThemeProvider>
-        </body>
-      </html>
-      <Toaster />
-    </ClerkProvider>
+        </ClerkProvider>
+      </body>
+    </html>
   );
 }

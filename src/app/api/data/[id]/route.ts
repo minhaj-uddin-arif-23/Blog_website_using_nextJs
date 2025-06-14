@@ -6,7 +6,7 @@ import { ObjectId } from "mongodb";
 export async function GET(
   request: any,
   { params }: { params: { id: string } }
-) {
+): Promise<Response> {
   const { id } = params;
 
   try {
