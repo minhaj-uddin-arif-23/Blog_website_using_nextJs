@@ -1,13 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import clientPromise from "@/lib/mongodb";
 import { ObjectId } from "mongodb";
 
 export async function GET(
-  request: any,
-  { params }: { params: { id: string } }
+  request: Request,
+  context: { params: { id: string } }
 ): Promise<Response> {
-  const { id } = params;
+  const { id } = context.params;
 
   try {
     const client = await clientPromise;
